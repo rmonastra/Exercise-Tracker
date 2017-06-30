@@ -22,24 +22,16 @@ app.get('/', (req, res) => {
 
 
 app.post("/api/exercise/new-user/", (req,res) => {
-    let user_name = req.body.username;
-    db.userDB.find({"user_name:": user_name});
+    let username = req.body.username;
+    
+    userDB.find({"user_name": username}, ()=>{
 
-    return res.json(result);
-});
+    });
+   
+}); 
 
 //Listen on connection port
 let port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log("Listening on port: " + port);
 });
-
-
-
-
-
-
-
-
-
-

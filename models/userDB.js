@@ -10,6 +10,6 @@ const urlSchema = new Schema({
     exerc_date: String
 });
 
-const ModelClass = mongoose.model('shortUrl', urlSchema);
+const ModelClass = mongoose.model('userDB', urlSchema);
 
 module.exports = ModelClass;
