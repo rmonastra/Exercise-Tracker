@@ -42,7 +42,13 @@ app.post("/api/exercise/new-user/", (req,res) => {
 });
 
 app.post("/api/exercise/add/", (req,res) => {
-    
+    let userId = req.body.userId
+    let exercDesc = req.body.description
+    let exercDura = req.body.duration
+    let exercDate = req.body.date
+
+        console.log(userId + "  " + exercDesc + "  " + exercDura + "  " + exercDate  )
+
 });
 
 //Listen on connection port
