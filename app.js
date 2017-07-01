@@ -41,6 +41,10 @@ app.post("/api/exercise/new-user/", (req,res) => {
   });
 });
 
+app.post("/api/exercise/add/", (req,res) => {
+    
+});
+
 //Listen on connection port
 let port = process.env.PORT || 3000;
 app.listen(port, () => {
