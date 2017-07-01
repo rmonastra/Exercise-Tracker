@@ -5,6 +5,7 @@ const cors = require('cors');
 const mongoose = require("mongoose");
 const mongodb = require('mongodb').MongoClient();
 const userDB = require("./models/userDB");
+const exerciseDB = require("./models/exerciseDB");
 const dotenv = require("dotenv").config();
 const path = require('path');
 
@@ -47,6 +48,13 @@ app.post("/api/exercise/add/", (req,res) => {
     let exercDura = req.body.duration
     let exercDate = req.body.date
 
+    let addExerc = new exerciseDB({
+        user_id: userId,
+        exerc_desc: exercDesc,
+        exerc_dura: exercDura,
+        exerc_date: exercDate
+      });
+      addExerc.save()
         console.log(userId + "  " + exercDesc + "  " + exercDura + "  " + exercDate  )
 
 });
