@@ -48,14 +48,18 @@ app.post("/api/exercise/add/", (req,res) => {
     let exercDura = req.body.duration
     let exercDate = req.body.date
 
-    let addExerc = new exerciseDB({
+    userDB.findById(userId, (err, user) =>{
+
+    let addExerc = new userDB({
+        user_name: user.username,
         user_id: userId,
         exerc_desc: exercDesc,
         exerc_dura: exercDura,
         exerc_date: exercDate
       });
       addExerc.save()
-        console.log(userId + "  " + exercDesc + "  " + exercDura + "  " + exercDate  )
+    
+    }); 
 
 });
 
