@@ -22,10 +22,24 @@ app.get('/', (req, res) => {
 
 
 app.post("/api/exercise/new-user/", (req,res) => {
-    let user_name = req.body.username;
-    db.userDB.find({"user_name:": user_name});
-
-    return res.json(result);
+    let username = req.body.username;
+    
+    userDB.find({"user_name": {$eq: username}}, (err, doc) => {
+    if (doc) {
+      return res.send('User already exists')
+    }
+    else{
+      console.log(username)
+      let newUser = new userDB({
+        user_name: username
+      });
+      newUser.save((err, url) =>{
+        res.json({
+          user_name: username
+        })
+      });
+    }
+  });
 });
 
 //Listen on connection port
