@@ -21,6 +21,15 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
+app.get("", (req,res) =>{
+
+let user = req.body.userId
+
+  userDB.find({"_id": {$eq: user}}, (err, doc) =>{
+    
+  })
+
+})
 
 app.post("/api/exercise/new-user/", (req,res) => {
     let username = req.body.username;
@@ -34,12 +43,15 @@ app.post("/api/exercise/new-user/", (req,res) => {
 
       let newUser = new userDB({
         user_name: username,
-        user_id: idUser
+        _id: idUser,
+        exerc_desc: "",
+        exerc_dura: "",
+        exerc_date: ""
       });
       newUser.save((err, url) =>{
         res.json({
           user_name: username,
-          user_id: idUser
+          _id: idUser
         })
       });
     }
@@ -48,16 +60,19 @@ app.post("/api/exercise/new-user/", (req,res) => {
 
 app.post("/api/exercise/add/", (req,res) => {
     let user = req.body.userId
-   /* let exercDesc = req.body.description
-    let exercDura = req.body.duration
-    let exercDate = req.body.date*/
 
-    userDB.findOne({"user_id": {$eq: user}}, (err, doc) =>{
+    userDB.findOne({"_id": {$eq: user}}, (err, doc) =>{
         if(doc){
           doc.exerc_desc =  req.body.description,
           doc.exerc_dura = req.body.duration,
           doc.exerc_date = req.body.date
         }
+        res.json({
+          _id: user,
+          exerc_desc: req.body.description,
+          exerc_dura: req.body.duration,
+          exerc_date: req.body.date
+        })
         doc.save();
 });
 
