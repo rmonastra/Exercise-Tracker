@@ -9,7 +9,7 @@ const dotenv = require("dotenv").config();
 const path = require('path');
 const randomstring = require("randomstring");
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/userDBs' )
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/userdbs' )
 
 app.use(cors())
 
@@ -47,26 +47,19 @@ app.post("/api/exercise/new-user/", (req,res) => {
 });
 
 app.post("/api/exercise/add/", (req,res) => {
-    let userId = req.body.userId
-    let exercDesc = req.body.description
+    let user = req.body.userId
+   /* let exercDesc = req.body.description
     let exercDura = req.body.duration
-    let exercDate = req.body.date
+    let exercDate = req.body.date*/
 
-/*    userDB.update("_id": userId, (err, user) =>{
-
-    let addExerc = new userDB({
-        user_name: user.username,
-        user_id: userId,
-        exerc_desc: exercDesc,
-        exerc_dura: exercDura,
-        exerc_date: exercDate
-      });
-      addExerc.save()
-
-    }); */
-
-
-
+    userDB.findOne({"user_id": {$eq: user}}, (err, doc) =>{
+        if(doc){
+          doc.exerc_desc =  req.body.description,
+          doc.exerc_dura = req.body.duration,
+          doc.exerc_date = req.body.date
+        }
+        doc.save();
+});
 
 });
 
