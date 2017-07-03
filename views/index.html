@@ -28,9 +28,20 @@
 
           <form action="/api/exercise/log/" method="get">
             <h3>Check Database</h3>
-            <input id="uname" type="text" name="userIdGet" placeholder="userId*">
+            <input id="userget" type="text" name="userIdGet" placeholder="userId*">
+            <input id="frdate" type="text" name="fromDate" placeholder="From:Date(optional)">
+            <input id="todate" type="text" name="toDate" placeholder="To:Date(optional)">
             <input type="submit" value="Submit">
           </form>
+
+          <div>
+            GET users's exercise log: GET /api/exercise/log?{userId}[&from][&to][&limit]
+
+{ } = required, [ ] = optional
+
+from, to = dates (yyyy-mm-dd); limit = number
+
+</p>
 
       </div>
    </body>
