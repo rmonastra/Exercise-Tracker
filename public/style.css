@@ -32,6 +32,29 @@ form {
   max-width: 340px;
   border-radius: 5px;
 }
+#display{
+  position: absolute;
+  margin: 3px;
+  padding: 12px;
+  background-color: #87D37C;
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 5px;
+}
+
+button{
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+#results{
+  position: relative;
+  background-color: white;
+  margin-bottom: 10px;
+  max-height: 200px;
+  background-color: white;
+}
+
 
 input {
   display: block;
