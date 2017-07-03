@@ -21,14 +21,21 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
-app.get("", (req,res) =>{
+app.get("/api/exercise/log/", (req,res) =>{
 
 let user = req.body.userId
 
-  userDB.find({"_id": {$eq: user}}, (err, doc) =>{
-    
+  userDB.findOne(req.query._id, (err, doc) =>{ 
+    if(doc) {
+       res.json({
+          _id: doc._id,
+          user_name: doc.user_name,
+          exerc_desc: doc.exerc_desc,
+          exerc_dura: doc.exerc_dura,
+          exerc_date: doc.exerc_date
+        })
+    }
   })
-
 })
 
 app.post("/api/exercise/new-user/", (req,res) => {
@@ -62,6 +69,7 @@ app.post("/api/exercise/add/", (req,res) => {
     let user = req.body.userId
 
     userDB.findOne({"_id": {$eq: user}}, (err, doc) =>{
+      //console.log({user_name: doc.user_name})
         if(doc){
           doc.exerc_desc =  req.body.description,
           doc.exerc_dura = req.body.duration,
@@ -69,6 +77,7 @@ app.post("/api/exercise/add/", (req,res) => {
         }
         res.json({
           _id: user,
+          user_name: doc.user_name,
           exerc_desc: req.body.description,
           exerc_dura: req.body.duration,
           exerc_date: req.body.date
